@@ -3,7 +3,7 @@ import { sRGBEncoding } from "three";
 import { ShaderLib } from "three";
 import { RepeatWrapping } from "three";
 import { TextureLoader } from "three";
-import { CityObjectsMaterial } from "../materials/CityObjectsMaterial";
+import { CityObjectsMaterial } from "../materials/CityObjectsMaterial.js";
 
 export class TextureManager {
 
