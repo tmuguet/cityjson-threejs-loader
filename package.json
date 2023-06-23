@@ -6,26 +6,88 @@
   "author": "Stelios Vitalis",
   "license": "MIT",
   "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "main": "dist/main.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "targets": {
+    "examples": {
+      "source": [
+        "example/index.html",
+        "example/materials.html"
+      ],
+      "context": "browser",
+      "distDir": "./example/dev-bundle",
+      "publicUrl": "."
+    },
+    "main": {
+      "source": "src/index.js",
+      "isLibrary": true,
+      "context": "browser",
+      "includeNodeModules": {
+        "three": true,
+        "earcut": true
+      }
+    },
+    "module": {
+      "source": "src/index.js",
+      "isLibrary": true,
+      "context": "node",
+      "includeNodeModules": {
+        "three": false,
+        "earcut": false,
+        "regenerator-runtime": true
+      }
+    },
+    "_types": {
+      "source": [
+        "src/index.d.ts",
+        "src/base/CityJSONLoader.d.ts",
+        "src/helpers/AttributeEvaluator.d.ts",
+        "src/materials/CityObjectsBaseMaterial.d.ts",
+        "src/materials/CityObjectsLineMaterial.d.ts",
+        "src/materials/CityObjectsMaterial.d.ts",
+        "src/materials/CityObjectsPointsMaterial.d.ts",
+        "src/objects/CityObjectsInstancedMesh.d.ts",
+        "src/objects/CityObjectsLines.d.ts",
+        "src/objects/CityObjectsMesh.d.ts",
+        "src/objects/CityObjectsPoints.d.ts",
+        "src/parsers/geometry/BaseParser.d.ts",
+        "src/parsers/geometry/GeometryData.d.ts",
+        "src/parsers/geometry/LineParser.d.ts",
+        "src/parsers/geometry/PointParser.d.ts",
+        "src/parsers/geometry/TriangleParser.d.ts",
+        "src/parsers/helpers/ChunkParser.d.ts",
+        "src/parsers/CityJSONWorkerParser.d.ts",
+        "src/parsers/CityObjectParser.d.ts",
+        "src/parsers/ObjectMaterialParser.d.ts"
+      ],
+      "distDir": "dist/"
+    }
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "files": [
-    "src/*"
+    "dist/*",
+    "package.json",
+    "README.md"
   ],
   "scripts": {
-    "dev": "concurrently \"parcel watch example/*.html --out-dir ./example/dev-bundle/ --public-url . --no-cache\" \"static-server\"",
-    "lint": "eslint \"src/**/*.js\""
+    "dev": "concurrently \"parcel watch --target examples\" \"static-server\"",
+    "lint": "eslint \"src/**/*.js\"",
+    "build": "parcel build"
   },
   "dependencies": {
     "earcut": "^2.2.2",
-    "three": "^0.139.2"
+    "three": "^0.148.0"
   },
   "devDependencies": {
+    "@parcel/packager-ts": "2.9.2",
+    "@parcel/transformer-raw": "^2.9.2",
     "concurrently": "^6.0.0",
     "eslint": "^7.18.0",
     "eslint-config-mdcs": "^5.0.0",
     "eslint-plugin-jest": "^24.1.3",
     "jest": "^26.6.3",
-    "parcel-bundler": "^1.12.4",
+    "parcel": "^2.9.2",
     "regenerator-runtime": "^0.13.9",
     "static-server": "^2.2.1"
   }

@@ -79,7 +79,7 @@ export class ObjectMaterialParser {
 			const vertexArray = new Float32Array( vertices );
 			geom.setAttribute( 'position', new BufferAttribute( vertexArray, 3 ) );
 
-			geom.attributes.position.needsUpdate = true;
+			geom.getAttribute( 'position' ).needsUpdate = true;
 
 			if ( this.matrix !== null ) {
 
@@ -89,7 +89,7 @@ export class ObjectMaterialParser {
 
 			geom.computeVertexNormals();
 
-			const material = new MeshLambertMaterial();
+			let material = new MeshLambertMaterial();
 			if ( i < this.materials.length ) {
 
 				material.color.setRGB( ...this.materials[ i ].diffuseColor );
